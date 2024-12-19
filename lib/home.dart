@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled/adminpage.dart';
 import 'package:untitled/mappage.dart';
+import 'package:untitled/upl.dart';
 
 class DisasterHomePage extends StatefulWidget {
   const DisasterHomePage({super.key});
@@ -87,13 +88,11 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/ic_launcher.png'),
+              backgroundImage: AssetImage('assets/images/logo.png'),
             ),
             IconButton(
               icon: const Icon(Icons.account_circle),
-              onPressed: () {
-                // TODO: Navigate to profile page.
-              },
+              onPressed: () { },
             ),
           ],
         ),
@@ -120,12 +119,48 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 children: [
-                  GridButton(label: 'Upload Problem', icon: Icons.upload),
-                  GridButton(label: 'View PID', icon: Icons.visibility),
-                  GridButton(label: 'View Area Problem', icon: Icons.map),
-                  GridButton(label: 'Custom Guidelines', icon: Icons.rule),
-                  GridButton(label: 'Submit Feedback', icon: Icons.feedback),
-                  GridButton(label: 'Contact Local Authority', icon: Icons.contact_phone),
+                  GridButton(
+                    label: 'Upload Problem',
+                    icon: Icons.upload,
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const UploadProblemPage()));
+                    },
+                  ),
+                  GridButton(
+                    label: 'View PID',
+                    icon: Icons.visibility,
+                    onPressed: () {
+                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const ViewPIDPage()));
+                    },
+                  ),
+                  GridButton(
+                    label: 'View Area Problem',
+                    icon: Icons.map,
+                    onPressed: () {
+                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const AreaProblemPage()));
+                    },
+                  ),
+                  GridButton(
+                    label: 'Custom Guidelines',
+                    icon: Icons.rule,
+                    onPressed: () {
+                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomGuidelinesPage()));
+                    },
+                  ),
+                  GridButton(
+                    label: 'Submit Feedback',
+                    icon: Icons.feedback,
+                    onPressed: () {
+                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const SubmitFeedbackPage()));
+                    },
+                  ),
+                  GridButton(
+                    label: 'Contact Local Authority',
+                    icon: Icons.contact_phone,
+                    onPressed: () {
+                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactLocalAuthorityPage()));
+                    },
+                  ),
                 ],
               ),
             ],
@@ -154,8 +189,9 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
 class GridButton extends StatelessWidget {
   final String label;
   final IconData icon;
+  final VoidCallback onPressed;
 
-  const GridButton({super.key, required this.label, required this.icon});
+  const GridButton({super.key, required this.label, required this.icon, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -168,9 +204,7 @@ class GridButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
         elevation: 5,
       ),
-      onPressed: () {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$label clicked')));
-      },
+      onPressed: onPressed,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
