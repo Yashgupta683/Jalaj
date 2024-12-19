@@ -87,13 +87,11 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/ic_launcher.png'),
+              backgroundImage: AssetImage('assets/images/logo.png'),
             ),
             IconButton(
               icon: const Icon(Icons.account_circle),
-              onPressed: () {
-                // TODO: Navigate to profile page.
-              },
+              onPressed: () {},
             ),
           ],
         ),
