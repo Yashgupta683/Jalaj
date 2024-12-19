@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled/adminpage.dart';
+import 'package:untitled/feedback.dart';
 import 'package:untitled/mappage.dart';
 import 'package:untitled/upl.dart';
 
@@ -151,7 +152,7 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
                     label: 'Submit Feedback',
                     icon: Icons.feedback,
                     onPressed: () {
-                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const SubmitFeedbackPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SubmitFeedbackPage()));
                     },
                   ),
                   GridButton(
