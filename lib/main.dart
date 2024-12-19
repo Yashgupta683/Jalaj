@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:untitled/access.dart';
 import 'package:untitled/home.dart';
+import 'package:untitled/homea.dart';
 
 void main() {
   runApp(const MyApp());
@@ -262,7 +263,7 @@ class SignUpPageState extends State<SignUpPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const DisasterHomePage(), // Replace with target page
+            builder: (context) => const DisasterHomePage(),
           ),
         );
       } else {
@@ -488,7 +489,7 @@ class SignUpAPageState extends State<SignUpAPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const DisasterHomePage()
+            builder: (context) => const DisasterHomeAPage()
           ),
         );
       } else {
@@ -655,6 +656,173 @@ class SignUpAPageState extends State<SignUpAPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class LoginAPage extends StatefulWidget {
+  const LoginAPage({super.key});
+
+  @override
+  LoginPageAState createState() => LoginPageAState();
+}
+
+class LoginPageAState extends State<LoginAPage> {
+  bool _obscureText = true;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool _isHovered = false;
+
+  void _handleLogin() {
+    if (_formKey.currentState!.validate()) {
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DisasterHomeAPage(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
+        backgroundColor: const Color.fromARGB(255, 63, 181, 120),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Welcome Back!",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Please login to your account",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                      labelText: "Username",
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter your username";
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: _obscureText,
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText ? Icons.visibility : Icons.visibility_off,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter your password";
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 30),
+                  MouseRegion(
+                    onEnter: (_) => setState(() => _isHovered = true),
+                    onExit: (_) => setState(() => _isHovered = false),
+                    child: GestureDetector(
+                      onTap: _handleLogin,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 15),
+                        decoration: BoxDecoration(
+                          color: _isHovered
+                              ? const Color.fromARGB(255, 73, 191, 130)
+                              : const Color.fromARGB(255, 63, 181, 120),
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: _isHovered
+                              ? [
+                            const BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                              offset: Offset(0, 5),
+                            )
+                          ]
+                              : [],
+                        ),
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () {
+                      // Navigate to forgot password page
+                    },
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
                       ),
                     ),
                   ),

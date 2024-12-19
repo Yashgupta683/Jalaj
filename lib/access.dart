@@ -133,7 +133,7 @@ class AccessPageState extends State<AccessPage> with SingleTickerProviderStateMi
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                const LoginPage()),
+                                const LoginAPage()),
                           );
                         },
                       ),
@@ -180,7 +180,7 @@ class AccessPageState extends State<AccessPage> with SingleTickerProviderStateMi
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
