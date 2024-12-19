@@ -52,7 +52,7 @@ class SplashScreenState extends State<SplashScreen> {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage('assets/images/logo.png'),
+              backgroundImage: AssetImage('assets/images/ic_launcher.png'),
             ),
           ],
         ),

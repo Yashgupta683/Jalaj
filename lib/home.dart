@@ -87,7 +87,7 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/logo.png'),
+              backgroundImage: AssetImage('assets/images/ic_launcher.png'),
             ),
             IconButton(
               icon: const Icon(Icons.account_circle),
