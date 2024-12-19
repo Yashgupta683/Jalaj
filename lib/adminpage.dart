@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/home.dart';
-import 'package:untitled/map.dart';
+import 'package:untitled/mappage.dart';
 
 
 class Adminpage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _AdminpageState extends State<Adminpage> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const Mappage()),
+          MaterialPageRoute(builder: (context) => const MapSelectionPage()),
         );
         break;
       case 2:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled/adminpage.dart';
-import 'package:untitled/map.dart';
+import 'package:untitled/mappage.dart';
 
 class DisasterHomePage extends StatefulWidget {
   const DisasterHomePage({super.key});
@@ -66,7 +66,7 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => const Adminpage()));
         break;
       case 1:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const Mappage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSelectionPage()));
         break;
       case 2:
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DisasterHomePage()));
