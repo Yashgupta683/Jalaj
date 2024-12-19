@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled/adminpage.dart';
+import 'package:untitled/areaprob.dart';
+import 'package:untitled/call.dart';
+import 'package:untitled/cgl.dart';
 import 'package:untitled/feedback.dart';
 import 'package:untitled/mappage.dart';
 import 'package:untitled/upl.dart';
@@ -138,14 +141,14 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
                     label: 'View Area Problem',
                     icon: Icons.map,
                     onPressed: () {
-                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const AreaProblemPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AreaProblemPage()));
                     },
                   ),
                   GridButton(
                     label: 'Custom Guidelines',
                     icon: Icons.rule,
                     onPressed: () {
-                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomGuidelinesPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomGuidelinesPage()));
                     },
                   ),
                   GridButton(
@@ -159,7 +162,7 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
                     label: 'Contact Local Authority',
                     icon: Icons.contact_phone,
                     onPressed: () {
-                     // Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactLocalAuthorityPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactLocalAuthorityPage()));
                     },
                   ),
                 ],

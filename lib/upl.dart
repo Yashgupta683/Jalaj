@@ -12,12 +12,12 @@ class _UploadProblemPageState extends State<UploadProblemPage> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
-  final latitudeController = TextEditingController();
-  final longitudeController = TextEditingController();
+  final locationController = TextEditingController();
 
   String? _pdfFilePath;
   bool _isSubmitting = false;
 
+  // Function to pick PDF file
   void _pickPDF() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -31,6 +31,7 @@ class _UploadProblemPageState extends State<UploadProblemPage> {
     }
   }
 
+  // Function to submit the form
   void _submitForm() {
     if (!_formKey.currentState!.validate()) {
       return; // Stop if form validation fails
@@ -50,11 +51,13 @@ class _UploadProblemPageState extends State<UploadProblemPage> {
       _isSubmitting = true;
     });
 
+    // Simulate form submission delay
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _isSubmitting = false;
       });
 
+      // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Problem submitted successfully!'),
@@ -65,8 +68,7 @@ class _UploadProblemPageState extends State<UploadProblemPage> {
       // Clear the form
       titleController.clear();
       descriptionController.clear();
-      latitudeController.clear();
-      longitudeController.clear();
+      locationController.clear();
       setState(() {
         _pdfFilePath = null;
       });
@@ -153,25 +155,18 @@ class _UploadProblemPageState extends State<UploadProblemPage> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: latitudeController,
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          hintText: 'Location',
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Location is required.';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ],
+                TextFormField(
+                  controller: locationController,
+                  decoration: const InputDecoration(
+                    hintText: 'Enter location',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Location is required.';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
                 Center(
