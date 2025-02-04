@@ -98,7 +98,7 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
             IconButton(
               icon: const Icon(Icons.account_circle),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>Profilepage(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>ProfileScreen(),));
               },
             ),
           ],

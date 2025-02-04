@@ -92,7 +92,7 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
             ),
             IconButton(
               icon: const Icon(Icons.account_circle),
-              onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=> const Profilepage()));},
+              onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>  ProfileScreen()));},
             ),
           ],
         ),

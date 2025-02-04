@@ -1,158 +1,143 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 
-class Profilepage extends StatefulWidget {
-  const Profilepage({super.key});
-
-  @override
-  State<Profilepage> createState() => _ProfilepageState();
+void main() {
+  runApp(MyApp());
 }
 
-class _ProfilepageState extends State<Profilepage> {
-  File? _profileImage;
-  bool _isLoading = false;
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ProfileScreen(),
+    );
+  }
+}
+
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  File? _image;
+  final picker = ImagePicker();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _contactController = TextEditingController();
+
+  String? _savedName;
+  String? _savedContact;
+  File? _savedImage;
+  bool _isEditing = true;
 
   Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    setState(() {
-      _isLoading = true;
-    });
-    try {
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-      if (pickedFile != null) {
-        File? croppedFile = await _cropImage(File(pickedFile.path));
-        if (croppedFile != null) {
-          setState(() {
-            _profileImage = croppedFile;
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Profile picture updated successfully!')),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Image cropping canceled.')),
-          );
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No image selected.')),
-        );
-      }
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to select image. Please try again.')),
-      );
-    } finally {
+    if (pickedFile != null) {
       setState(() {
-        _isLoading = false;
+        _image = File(pickedFile.path);
       });
     }
   }
 
-  Future<File?> _cropImage(File imageFile) async {
-    CroppedFile? croppedFile = await ImageCropper().cropImage(
-      sourcePath: imageFile.path,
-      aspectRatio: const CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
-      uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: 'Crop Image',
-          toolbarColor: Colors.green,
-          toolbarWidgetColor: Colors.white,
-          lockAspectRatio: true,
-        ),
-        IOSUiSettings(
-          title: 'Crop Image',
-        )
-      ],
-    );
-    return croppedFile != null ? File(croppedFile.path) : null;
+  void _saveProfile() {
+    setState(() {
+      _savedName = _nameController.text.isNotEmpty ? _nameController.text : _savedName;
+      _savedContact = _contactController.text.isNotEmpty ? _contactController.text : _savedContact;
+      _savedImage = _image ?? _savedImage;
+      _isEditing = false; // Hide input fields after saving
+    });
+  }
+
+  void _editProfile() {
+    setState(() {
+      _isEditing = true; // Show input fields for editing
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
-        backgroundColor: const Color.fromARGB(255, 63, 181, 120),
+        title: Text("User Profile"),
+        actions: [
+          if (_savedImage != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: CircleAvatar(
+                backgroundImage: FileImage(_savedImage!),
+              ),
+            ),
+        ],
       ),
-      body: Container(
-        color: const Color.fromARGB(255, 240, 240, 240),
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: _pickImage,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundImage: _profileImage != null
-                          ? FileImage(_profileImage!)
-                          : const AssetImage('assets/images/images.png') as ImageProvider,
-                      backgroundColor: Colors.grey[300],
-                      child: _profileImage == null
-                          ? const Icon(
-                        Icons.camera_alt,
-                        size: 40,
-                        color: Colors.white,
-                      )
-                          : null,
-                    ),
-                    if (_isLoading)
-                      const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'John Doe',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                '123 Main Street, Cityville',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                '+1 (123) 456-7890',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 63, 181, 120),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+              if (_isEditing || _savedImage == null)
+                GestureDetector(
+                  onTap: _isEditing ? _pickImage : null,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: _image != null ? FileImage(_image!) : null,
+                    child: _image == null
+                        ? Icon(Icons.camera_alt, size: 50, color: Colors.grey)
+                        : null,
                   ),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                  child: Text(
-                    'Edit Profile',
-                    style: TextStyle(fontSize: 16),
+              SizedBox(height: 20),
+
+              if (_isEditing) ...[
+                TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    labelText: "Name",
+                    border: OutlineInputBorder(),
                   ),
                 ),
-              ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: _contactController,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    labelText: "Contact Info",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _saveProfile,
+                  child: Text("Save Profile"),
+                ),
+              ] else ...[
+                if (_savedImage != null)
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: FileImage(_savedImage!),
+                  ),
+                SizedBox(height: 20),
+                Text(
+                  _savedName ?? "No Name",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  _savedContact ?? "No Contact Info",
+                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _editProfile,
+                  child: Text("Edit Profile"),
+                ),
+              ],
             ],
           ),
         ),
