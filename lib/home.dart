@@ -7,6 +7,7 @@ import 'package:untitled/call.dart';
 import 'package:untitled/cgl.dart';
 import 'package:untitled/feedback.dart';
 import 'package:untitled/mappage.dart';
+import 'package:untitled/profile.dart';
 import 'package:untitled/upl.dart';
 
 class DisasterHomePage extends StatefulWidget {
@@ -96,7 +97,9 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
             ),
             IconButton(
               icon: const Icon(Icons.account_circle),
-              onPressed: () { },
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>Profilepage(),));
+              },
             ),
           ],
         ),

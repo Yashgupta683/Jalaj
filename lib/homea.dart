@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:untitled/adminpage.dart';
 import 'package:untitled/mappage.dart';
+import 'package:untitled/profile.dart';
 
 class DisasterHomeAPage extends StatefulWidget {
   const DisasterHomeAPage({super.key});
@@ -91,7 +92,7 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
             ),
             IconButton(
               icon: const Icon(Icons.account_circle),
-              onPressed: () {},
+              onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=> const Profilepage()));},
             ),
           ],
         ),
