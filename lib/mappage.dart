@@ -32,7 +32,7 @@ class MapSelectionPage extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ChoroplethMap()),
+                      MaterialPageRoute(builder: (context) => const IndiaChoroplethMap()),
                     );
                   },
                   child: AnimatedContainer(
@@ -74,7 +74,7 @@ class MapSelectionPage extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const PointMap()),
+                      MaterialPageRoute(builder: (context) => const IndiaPointMap()),
                     );
                   },
                   child: AnimatedContainer(
