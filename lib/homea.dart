@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:untitled/adminpage.dart';
+import 'package:untitled/coa.dart';
+
 import 'package:untitled/mappage.dart';
 import 'package:untitled/profile.dart';
 
@@ -63,20 +64,19 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
     });
 
     switch (index) {
+
       case 0:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const Adminpage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSelectionPage()))
+            .then((_) => setState(() => _selectedIndex = 1));
         break;
       case 1:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSelectionPage()));
         break;
       case 2:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DisasterHomeAPage()));
-        break;
-      case 3:
         _onSOSButtonPressed();
         break;
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -119,12 +119,14 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 children: [
-                  GridButton(label: 'View Problems', icon: Icons.report_problem),
-                  GridButton(label: 'Chat Other Admins', icon: Icons.chat),
-                  GridButton(label: 'Create Plan', icon: Icons.add_chart),
-                  GridButton(label: 'Compare Models', icon: Icons.compare),
-                  GridButton(label: 'Community Demographics', icon: Icons.people),
-                  GridButton(label: 'Area Details', icon: Icons.location_city),
+                  GridButton(label: 'View Problems', icon: Icons.report_problem,onPressed: (){},),
+                  GridButton(label: 'Chat Other Admins', icon: Icons.chat,onPressed: (){
+                    Navigator.push(context,MaterialPageRoute(builder: (context)=>const Chatwithotheradmins()));
+                  },),
+                  GridButton(label: 'Create Plan', icon: Icons.add_chart,onPressed: (){},),
+                  GridButton(label: 'Compare Models', icon: Icons.compare,onPressed: (){},),
+                  GridButton(label: 'Community Demographics', icon: Icons.people,onPressed: (){},),
+                  GridButton(label: 'Area Details', icon: Icons.location_city,onPressed: (){},),
 
                 ],
               ),
@@ -140,7 +142,7 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Admin'),
+
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Location'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.warning), label: 'SOS'),
@@ -151,11 +153,14 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
   }
 }
 
+
 class GridButton extends StatelessWidget {
   final String label;
   final IconData icon;
+  final VoidCallback onPressed;
 
-  const GridButton({super.key, required this.label, required this.icon});
+  const GridButton(
+      {super.key, required this.label, required this.icon, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -168,9 +173,7 @@ class GridButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
         elevation: 5,
       ),
-      onPressed: () {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$label clicked')));
-      },
+      onPressed: onPressed,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -179,14 +182,14 @@ class GridButton extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
           ),
         ],
       ),
     );
   }
 }
-
 class SOSHelper {
   static Future<void> sendSOS(BuildContext context) async {
     try {

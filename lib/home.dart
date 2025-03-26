@@ -69,19 +69,21 @@ class _DisasterHomePageState extends State<DisasterHomePage> {
 
     switch (index) {
       case 0:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const Adminpage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const Adminpage()))
+            .then((_) => setState(() => _selectedIndex = 2)); // Reset index when returning
         break;
       case 1:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSelectionPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const MapSelectionPage()))
+            .then((_) => setState(() => _selectedIndex = 2));
         break;
       case 2:
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DisasterHomePage()));
         break;
       case 3:
         _onSOSButtonPressed();
         break;
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

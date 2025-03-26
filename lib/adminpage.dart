@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/home.dart';
-import 'package:untitled/mappage.dart';
+
 
 
 class Adminpage extends StatefulWidget {
@@ -11,39 +10,13 @@ class Adminpage extends StatefulWidget {
 }
 
 class _AdminpageState extends State<Adminpage> {
-  int _selectedIndex = 0;
-
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    switch (index) {
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MapSelectionPage()),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const DisasterHomePage()),
-        );
-        break;
-      case 3:
-        SOSHelper.sendSOS(context);
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 63, 181, 120),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -88,30 +61,7 @@ class _AdminpageState extends State<Adminpage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex, // Set the current index
-        selectedItemColor: const Color.fromARGB(255, 63, 181, 120),
-        unselectedItemColor: const Color.fromARGB(255, 200, 230, 210),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Admin',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            label: 'Location',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.warning),
-            label: 'SOS',
-          ),
-        ],
-        onTap: _onItemTapped,
-      ),
+
     );
   }
 }
