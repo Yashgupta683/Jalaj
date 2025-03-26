@@ -30,8 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_map: ^5.0.0
-  latlong2: ^0.9.1
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
+  http: ^1.1.0
+
   flutter_map_marker_popup: ^5.2.0  # Updated version with null safety
   geocoding: ^2.0.0
   # Optionally, if you need specific tiles or thermal map layers
@@ -54,7 +56,7 @@ dependencies:
   wifi_scan: ^0.4.1+1
   camera: ^0.11.0+2
   webview_flutter: ^4.10.0
-  http: ^1.2.2
+#  http: ^1.2.2
   dash_chat_2: ^0.0.21
   flutter_gemini: ^3.0.0
   mobile_scanner: ^6.0.1
