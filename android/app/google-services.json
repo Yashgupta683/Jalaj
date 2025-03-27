@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "878044360395",
+    "project_id": "jalaj2",
+    "storage_bucket": "jalaj2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878044360395:android:6c522927538249f837354e",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPyIVnGkqR59_h-p6HbvaEWmbc_4qPqLM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

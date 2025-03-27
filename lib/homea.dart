@@ -5,6 +5,7 @@ import 'package:untitled/coa.dart';
 
 import 'package:untitled/mappage.dart';
 import 'package:untitled/profile.dart';
+import 'package:untitled/screens/disaster_feed.dart';
 
 class DisasterHomeAPage extends StatefulWidget {
   const DisasterHomeAPage({super.key});
@@ -125,7 +126,9 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
                   },),
                   GridButton(label: 'Create Plan', icon: Icons.add_chart,onPressed: (){},),
                   GridButton(label: 'Compare Models', icon: Icons.compare,onPressed: (){},),
-                  GridButton(label: 'Community Demographics', icon: Icons.people,onPressed: (){},),
+                  GridButton(label: 'Community Demographics', icon: Icons.people,onPressed: (){
+                     Navigator.push((context),MaterialPageRoute(builder: (context)=> const DisasterFeed()));
+                  },),
                   GridButton(label: 'Area Details', icon: Icons.location_city,onPressed: (){},),
 
                 ],
