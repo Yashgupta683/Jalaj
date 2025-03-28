@@ -6,6 +6,10 @@ import 'package:untitled/coa.dart';
 import 'package:untitled/mappage.dart';
 import 'package:untitled/profile.dart';
 
+import 'package:untitled/comparemodels.dart';
+import 'package:untitled/areadetails.dart';
+
+
 class DisasterHomeAPage extends StatefulWidget {
   const DisasterHomeAPage({super.key});
 
@@ -124,9 +128,16 @@ class _DisasterHomeAPageState extends State<DisasterHomeAPage> {
                     Navigator.push(context,MaterialPageRoute(builder: (context)=>const Chatwithotheradmins()));
                   },),
                   GridButton(label: 'Create Plan', icon: Icons.add_chart,onPressed: (){},),
-                  GridButton(label: 'Compare Models', icon: Icons.compare,onPressed: (){},),
-                  GridButton(label: 'Community Demographics', icon: Icons.people,onPressed: (){},),
-                  GridButton(label: 'Area Details', icon: Icons.location_city,onPressed: (){},),
+                  GridButton(label: 'Compare Models', icon: Icons.compare,onPressed: (){
+                    Navigator.push((context),MaterialPageRoute(builder: (context)=> DisasterComparisonScreen()));
+
+                  },),
+                  GridButton(label: 'Community Demographics', icon: Icons.people,onPressed: (){
+                     // Navigator.push((context),MaterialPageRoute(builder: (context)=> const DisasterFeed()));
+                  },),
+                  GridButton(label: 'Area Details', icon: Icons.location_city,onPressed: (){
+                    Navigator.push((context), MaterialPageRoute(builder: (context)=> PowerBIWebView()));
+                  },),
 
                 ],
               ),
